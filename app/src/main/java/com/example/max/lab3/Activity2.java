@@ -11,8 +11,9 @@ import android.widget.Toast;
 
 public class Activity2 extends AppCompatActivity {
 
+    Intent targetIntent;
+    String Login,Password;
 
-    Context context = getApplicationContext();
 
 
     @Override
@@ -23,16 +24,17 @@ public class Activity2 extends AppCompatActivity {
 
         TextView ChildTV = (TextView) findViewById(R.id.editText3);
 
-        String targetPassword, targetName;
 
-        Intent targetIntent = getIntent();
-        targetPassword = targetIntent.getStringExtra("EXTRA_PASSWORD");
-        targetName = targetIntent.getStringExtra("EXTRA_NAME");
 
-        if (targetPassword== "Lab03" && targetName== "Max"){
+        targetIntent = getIntent();
+        Password= targetIntent.getStringExtra("EXTRA_PASSWORD");
+        Login = targetIntent.getStringExtra("EXTRA_NAME");
+
+        if (Password.equals("Lab03")  && Login.equals("Max")){
+            Context context= getApplicationContext();
+
             Toast aToast = new Toast(context);
-
-            aToast.makeText(context, "Password OK ! ", Toast.LENGTH_LONG).show();
+            aToast.makeText(context, "Password/Login OK ! ", Toast.LENGTH_LONG).show();
 
         }
 
@@ -43,19 +45,15 @@ public class Activity2 extends AppCompatActivity {
             AlertDialog.Builder DialogConf = new AlertDialog.Builder(this);
 
             DialogConf.setTitle("Alert");
-            DialogConf.setMessage("Password not OK");
+            DialogConf.setMessage("Password/Login not OK");
             DialogConf.setIcon(R.mipmap.ic_launcher);
             DialogConf.setNeutralButton("Retry",
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            Toast.makeText(context, "You closed the dialog.", Toast.LENGTH_LONG).show();
-
-                            Intent childIntent= new Intent(Activity2.this, Main.class);
-
+                            new DialogInterface.OnClickListener(){
+                                public void onClick(DialogInterface dialog, int id){
+                                    finish();
+                                }
 
 
-                            startActivity(childIntent);
-                        }
                     });
 
             AlertDialog MyDialog = DialogConf.create();

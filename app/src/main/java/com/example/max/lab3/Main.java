@@ -9,6 +9,12 @@ import android.view.View;
 
 public class Main extends AppCompatActivity {
 
+    EditText LogText, PassText;
+    String  Login, Password;
+    Intent intent1;
+    Button button;
+
+
 
 
     @Override
@@ -16,23 +22,22 @@ public class Main extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        EditText mTV = (EditText) findViewById(R.id.editText);
+        LogText= (EditText) findViewById(R.id.editText2);
+        PassText = (EditText) findViewById(R.id.editText);
+        button = (Button) findViewById(R.id.button);
 
 
-        EditText mTV1 = (EditText) findViewById(R.id.editText2);
-
-
-        Button button = (Button) findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                Intent intent1= new Intent(Main.this, Activity2.class);
+                intent1= new Intent(Main.this, Activity2.class);
 
-                String input = mTV.getText().toString();
-                String input1 = mTV1.getText().toString();
 
-                intent1.putExtra("EXTRA_PASSWORD", input);
-                intent1.putExtra("EXTRA_NAME", input1);
+                Login= LogText.getText().toString();
+                Password = PassText.getText().toString();
+
+                intent1.putExtra("EXTRA_PASSWORD", Login );
+                intent1.putExtra("EXTRA_NAME", Password);
 
                 startActivity(intent1);
             }
